@@ -1,0 +1,16 @@
+.nav{
+    background-color: aqua;
+    grid-area: n;
+  
+  }
+
+.item{
+  color:green;
+  font-size: 26px;
+  text-decoration: none;
+}
+
+.item a{
+  text-decoration: none;
+}
+  
