@@ -2,9 +2,10 @@
     grid-area: c;
     background-color: chocolate;
     height: 100vh;
+    margin: 10px 10px 10px 10px;
 }
 
 .content img{
-  height: 200px;
-  width: 800px;
+  height: 120px;
+  width: 100%;
 }

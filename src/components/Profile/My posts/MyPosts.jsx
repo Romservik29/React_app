@@ -5,11 +5,8 @@ import Posts from './Posts/Posts';
 const MyPosts = () => {
     return (
     <div>
-        My post
-        <div>
-            New post
-        </div>
-        <Posts />
+        <Posts username="Andrew Post" message="Hi, my dear ftiend"/>
+        <Posts username="Oleg Bakalow" message="What's happend?"/>
     </div >
     )
 }

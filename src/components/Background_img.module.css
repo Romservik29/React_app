@@ -1,0 +1,10 @@
+.background{
+    grid-area: b;
+    width: 100%;
+    height: 20vh;
+}
+
+.background img{
+    width: 100%;
+    height: 100%;
+}
