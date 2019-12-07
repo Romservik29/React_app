@@ -1,0 +1,26 @@
+.dialogs img,.message_wrapper img{
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+}
+
+.dialogs_wrapper,.message_wrapper{
+display: flex;
+margin: 10px 10px 10px 10px;
+
+}
+
+.dialog_wrapper{
+    display: flex;
+    border-right: 5px black solid;
+    
+}
+
+.dialog{
+    margin: 10px 5px 10px 5px;
+    text-decoration: none;
+}
+
+
+
+
