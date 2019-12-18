@@ -14,8 +14,16 @@ const App = (props) => {
         <Background_img />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path="/profile" render={()=><Profile state={props.state.profilePage} addPost={props.addPost}/>}/>  
-          <Route path="/dialogs" render={()=><Dialogs state={props.state.messagesPage} />} />      
+          <Route path="/profile" render={()=><Profile   
+              profilePage={props.state.profilePage}
+              addPost={props.addPost} 
+              updateNewPostText={props.updateNewPostText}
+                                 /> }/>  
+          <Route path="/dialogs" render={()=><Dialogs
+              messagesPage={props.state.messagesPage} 
+              updateNewMessageText={props.updateNewMessageText}
+              addMessage={props.addMessage}
+              />} />      
         </div>
       </div>
   );

@@ -1,17 +1,19 @@
 import React from 'react';
 import classes from './Profile.module.css';
 import MyPosts from './My posts/MyPosts';
-import Profile_info from './Profile_info/Profile_info';
-import AddPost from './My posts/Posts/AddPosts';
+import Profile_info from './ProfileInfo/Profile_info';
+import NewPost from './My posts/Posts/NewPost';
 
 
 
 let Profile = (props) => {
-  debugger;
     return (<div className={classes.content}>
         <Profile_info/>
-        <AddPost addPost={props.addPost}/>
-        <MyPosts posts={props.state.posts}/>
+        <NewPost newPostText={props.profilePage.newPostText}
+                 addPost={props.addPost}
+                 updateNewPostText={props.updateNewPostText} />
+        <MyPosts posts={props.profilePage.posts}/>
+        
       </div>
       )
 }
