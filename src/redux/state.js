@@ -1,3 +1,5 @@
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
 
 let store = {
     _state: {
@@ -24,28 +26,50 @@ let store = {
             newMessageText: ''
         }
     },
+
     getState(){
         return this._state;
+    },   
+     subscribe(observer){
+        this._callSubscriber = observer;
     },
+
     _callSubscriber() {
     },
+
     addPost() {
-        let newPost = {
-            id: 7,
-            message: this._state.profilePage.newPostText
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
+  
     },
     updateNewPostText(newText){
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
+
     },
-    subscribe(observer){
-        this._callSubscriber = observer;
+
+    dispatch(action){
+        if(action.type === ADD_POST){
+            let newPost = {
+                id: 7,
+                message: this._state.profilePage.newPostText
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        }
+        else if(action.type === UPDATE_NEW_POST_TEXT){
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 }
+
+export const updateNewPostTextActionCreator=(text)=>{
+    return{
+        type: UPDATE_NEW_POST_TEXT , 
+        newText: text
+    }    
+}
+
+export const addPostActionCreator =()=>({type: ADD_POST})
+
 
 
 window.store = store;
