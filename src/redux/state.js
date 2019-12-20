@@ -1,5 +1,7 @@
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let store = {
     _state: {
@@ -58,6 +60,19 @@ let store = {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
+        else if(action.type === UPDATE_NEW_MESSAGE_TEXT){
+            this._state.messagesPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+        }
+        else if(action.type === SEND_MESSAGE){
+            let newMessage ={
+                id:1,
+                message: this._state.messagesPage.newMessageText
+            }
+            this._state.messagesPage.messages.push(newMessage);
+            this._state.messagesPage.newMessageText = '';
+            this._callSubscriber(this._state);
+        }
     }
 }
 
@@ -70,6 +85,14 @@ export const updateNewPostTextActionCreator=(text)=>{
 
 export const addPostActionCreator =()=>({type: ADD_POST})
 
+export const updateNewMessageTextActionCreator=(text)=>{
+    return{
+        type: UPDATE_NEW_MESSAGE_TEXT , 
+        newText: text
+    }    
+}
+
+export const sendMessageActionCreator =()=>({type: SEND_MESSAGE})
 
 
 window.store = store;
@@ -80,22 +103,3 @@ window.store = store;
 
 
 export default store;
-
-/*export const updateNewMessageText= (newText)=>{
-    state.messagesPage.newMessageText = newText;
-    rerenderEntireTree(state);
-}
-
-
-export const addMessage = () => {
-    let newMessage = {
-        id: 7,
-        name: 'Maks',
-        message: state.profilePage.newMessageText
-    };
-
-    state.messagesPage.posts.push(newMessage);
-    state.messagesPage.newMessageText = '';
-    rerenderEntireTree(state);
-}
-*/

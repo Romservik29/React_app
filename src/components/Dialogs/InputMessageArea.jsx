@@ -1,20 +1,21 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
+import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/state';
 
 
 const InputMessageArea = (props) => {
 
     let newMessageElement = React.createRef();
 
-    let addMessage = ()=>{
-        let text = newMessageElement.current.value;
-        props.addMessage(text);
+    let sendMessage = ()=>{
+        props.dispatch(sendMessageActionCreator())
     }
 
     let onInputTextChange = ()=>{
+        debugger;
         let text = newMessageElement.current.value;
-        props.updateNewMessageText(text);
+        props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
     return (
@@ -24,7 +25,7 @@ const InputMessageArea = (props) => {
                       ref={newMessageElement} 
                       value={props.newMessageText} />
 
-            <button onClick={addMessage}>Send</button>
+            <button onClick={sendMessage}>Send</button>
         </div>
 
     )

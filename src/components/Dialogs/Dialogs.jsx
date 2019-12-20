@@ -22,7 +22,7 @@ const Dialogs = (props) => {
             </div>   
                 <div>
                     <InputMessageArea newMessageText={props.messagesPage.newMessageText} 
-                    updateNewMessageText={props.updateNewMessageText} addMessage={props.addMessage}
+                    dispatch={props.dispatch}
                     />
                 </div>
 

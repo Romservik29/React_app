@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Profile_info.module.css';
+import classes from './ProfileInfo.module.css';
 
 let Profile_info = () => {
     return (<div className={classes.content}>
@@ -10,7 +10,6 @@ let Profile_info = () => {
             <div className={classes.user_info_name}>Roman Brovka</div>
             <div>29.10.2012</div>
             <div>about</div>
-
         </div>
     </div>
     )
