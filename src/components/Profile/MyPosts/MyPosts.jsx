@@ -1,16 +1,17 @@
 import React from 'react';
-import Posts from './Posts/Posts';
+import Posts from './Posts/Post';
+import NewPost from './Posts/NewPost';
 
 
 
 
 const MyPosts = (props) => {
-    debugger;
-    let posts =props.store.getState().profileReducer.posts;
-    let postElements = posts.map(p => <Posts name={p.name} message={p.message}/>);
+
+    let postElements = props.posts.map(p => <Posts name={p.name} message={p.message}/>);
 
     return (
-    <div>
+    <div> 
+        <NewPost newPostText={props.newPostText} updateText={props.updateText} addPost={props.addPost}/>
         {postElements}
     </div >
     )
