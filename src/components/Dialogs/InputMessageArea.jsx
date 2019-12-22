@@ -1,31 +1,30 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
-import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/state';
+import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/dialogs-reducer';
 
 
 const InputMessageArea = (props) => {
 
-    let newMessageElement = React.createRef();
-
-    let sendMessage = ()=>{
+    let onSendMessage = ()=>{
         props.dispatch(sendMessageActionCreator())
     }
 
-    let onInputTextChange = ()=>{
-        debugger;
-        let text = newMessageElement.current.value;
+    let onInputTextChange = (e)=>{
+        let text = e.target.value;
         props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
     return (
 
         <div className={classes.dialog_wrapper + ' ' + classes.active}>
-            <textarea onChange={onInputTextChange} 
-                      ref={newMessageElement} 
-                      value={props.newMessageText} />
-
-            <button onClick={sendMessage}>Send</button>
+            <div><textarea
+                    placeholder="Entere youre message"
+                    onChange={onInputTextChange}                      
+                    value={props.store.getState().dialogsReducer.newMessageText}/>
+                    </div>
+                <div>
+            <button onClick={onSendMessage}>Send</button></div>
         </div>
 
     )

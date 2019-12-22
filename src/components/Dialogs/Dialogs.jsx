@@ -6,9 +6,10 @@ import InputMessageArea from './InputMessageArea';
 
 
 const Dialogs = (props) => {
-    debugger;
-    let dialogsElement = props.messagesPage.dialogs.map(d => <Dialog id={d.id} name={d.name} />);
-    let messagesElement = props.messagesPage.messages.map(m => <Message id={m.id} message={m.message} />);
+    debugger; 
+    let state = props.store.getState().dialogsReducer;
+    let dialogsElement = state.dialogs.map(d => <Dialog id={d.id} name={d.name} />);
+    let messagesElement = state.messages.map(m => <Message id={m.id} message={m.message} />);
 
     return (
 
@@ -18,13 +19,14 @@ const Dialogs = (props) => {
             </div>
 
             <div className="messages">
-                {messagesElement}
-            </div>   
-                <div>
-                    <InputMessageArea newMessageText={props.messagesPage.newMessageText} 
+                {messagesElement} 
+                <InputMessageArea store={props.store} 
                     dispatch={props.dispatch}
                     />
-                </div>
+            </div>   
+
+                   
+   
 
         </div>
     )

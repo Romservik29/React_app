@@ -7,9 +7,9 @@ import NewPost from './MyPosts/Posts/NewPost';
 let Profile = (props) => {
     return (<div className={classes.content}>
         <ProfileInfo/>
-        <NewPost newPostText={props.profilePage.newPostText}
+        <NewPost store={props.store}
                  dispatch={props.dispatch} />
-        <MyPosts posts={props.profilePage.posts}/>
+        <MyPosts store={props.store}/>
         
       </div>
       )
