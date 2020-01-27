@@ -7,8 +7,8 @@ import InputMessageArea from './InputMessageArea';
 
 const Dialogs = (props) => {
     
-    let dialogsElement = props.dialogs.map(d => <Dialog id={d.id} name={d.name} />);
-    let messagesElement = props.messages.map(m => <Message id={m.id} message={m.message} />);
+    let dialogsElement = props.dialogs.map(d => <Dialog id={d.id} key={d.id} name={d.name} />);
+    let messagesElement = props.messages.map(m => <Message id={m.id} key={m.id}message={m.message} />);
 
     return (
 

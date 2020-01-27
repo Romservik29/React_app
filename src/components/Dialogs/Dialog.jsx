@@ -7,7 +7,7 @@ const Dialog = (props) => {
     return (
 
         <div className={classes.dialog_wrapper + ' ' + classes.active}>
-            <img src="https://sun9-7.userapi.com/c855436/v855436900/a239f/VivQETh5kbo.jpg" />
+            <img src="https://sun9-7.userapi.com/c855436/v855436900/a239f/VivQETh5kbo.jpg" alt="" />
             <div className={classes.dialog}>
                 <NavLink to={`/dialogs/${props.id}`}>
                     <div>{props.name}</div>
@@ -18,5 +18,4 @@ const Dialog = (props) => {
 
     )
 }
-
 export default Dialog;

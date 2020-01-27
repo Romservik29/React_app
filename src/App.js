@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile';
 import BackgroundImg from './components/BackgroundImg';
 import {Route} from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Novels from './components/Navbar/Novels/Novels';
 
 const App = (props) => {
   return (
@@ -23,6 +24,7 @@ const App = (props) => {
               store={props.store} 
               dispatch={props.dispatch}
               />} />      
+              <Route path="/novels" render={()=><Novels/>} />    
         </div>
       </div>
   );
