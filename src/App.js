@@ -6,7 +6,7 @@ import Profile from './components/Profile/Profile';
 import BackgroundImg from './components/BackgroundImg';
 import {Route} from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import Novels from './components/Navbar/Novels/Novels';
+import NovelsContainer from './components/Novels/NovelsContainer';
 
 const App = (props) => {
   return (
@@ -24,7 +24,7 @@ const App = (props) => {
               store={props.store} 
               dispatch={props.dispatch}
               />} />      
-              <Route path="/novels" render={()=><Novels/>} />    
+              <Route path="/novels" render={()=><NovelsContainer/>} />    
         </div>
       </div>
   );
