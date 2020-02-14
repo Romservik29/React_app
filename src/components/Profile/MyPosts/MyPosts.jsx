@@ -6,7 +6,6 @@ import NewPost from './Posts/NewPost';
 
 
 const MyPosts = (props) => {
-    debugger
     let postElements = props.posts.map(p => <Posts name={p.name} key={p.id} message={p.message}/>);
     
     return (
