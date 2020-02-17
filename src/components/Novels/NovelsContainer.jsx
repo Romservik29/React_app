@@ -38,11 +38,11 @@ class NovelsContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader style={ {position: 'absolute'}}/> : null}
             <Novels onPageChanged={this.onPageChanged}
                 totalNovelsCount={this.props.totalNovelsCount}
                 pageSize={this.props.pageSize}
-                inBookmark={this.props.inBookmark}
+                addBookmark={this.props.addBookmark}
                 delBookmark={this.props.delBookmark}
                 novels={this.props.novels}
                 currentPage={this.props.currentPage}
@@ -56,34 +56,11 @@ let mapStateToProps = (state) => {
         novels: state.novelsPage.novels,
         pageSize: state.novelsPage.pageSize,
         totalNovelsCount: state.novelsPage.totalNovelsCount,
-        currentPage: state.novelsPage.currentPage
+        currentPage: state.novelsPage.currentPage,
+        isFetching: state.novelsPage.isFetching,
+    
     }
 }
-
-let mapDispatchToProps = (dispatch) => {
-    return {
-        inBookmark: (novelId) => {
-            dispatch(addBookmark(novelId))
-        },
-        delBookmark: (novelId) => {
-            dispatch(delBookmark(novelId))
-        },
-        setNovels: (novels) => {
-            dispatch(setNovels(novels))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPage(pageNumber))
-        },
-        setTotalNovelsCount: (totalCount) => {
-            dispatch(setTotalNovelsCount(totalCount))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetching(isFetching))
-        }
-    }
-}
-
-
 
 export default connect(mapStateToProps, {
     addBookmark,

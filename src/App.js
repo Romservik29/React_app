@@ -15,7 +15,7 @@ const App = (props) => {
         <BackgroundImg />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path="/profile" render={()=><Profile   
+          <Route path="/novel/:userId?" render={()=><Profile   
               store={props.store}
               dispatch={props.dispatch}
                                  /> }/>

@@ -1,17 +1,27 @@
 import React from 'react';
-import classes from './ProfileInfo.module.css';
+import classes from './ProfileInfo.module.css'
+import Preloader from '../../common/Preloader'
+import img from '../../../img/YinYan.jpg'
 
-let Profile_info = () => {
+let ProfileInfo = (props) => {
+    debugger
+    if (!props.novelInfo) {
+        return <Preloader/>
+    }
     return (<div className={classes.content}>
         <div className={classes.user_image}>
-        <img src="https://sun9-7.userapi.com/c855436/v855436900/a239f/VivQETh5kbo.jpg" alt="" />
+        <img src={props.novelInfo.photos.large!=null
+                                            ?props.novelInfo.photos.large
+                                            :img} alt="" />
         </div>
         <div className={classes.user_info}>
-            <div className={classes.user_info_name}>Roman Brovka</div>
+    <div className={classes.user_info_name}>{props.novelInfo.fullName}</div>
             <div>29.10.2012</div>
-            <div>about</div>
+            <div>{props.novelInfo.status!=null
+                                        ?props.novelInfo.status
+                                        :'status'}</div>
         </div>
     </div>
     )
 }
-export default Profile_info;
+export default ProfileInfo;

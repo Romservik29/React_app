@@ -1,10 +1,10 @@
 import React from 'react';
-//import Novel from './Novel/Novel';
 import img from '../../img/YinYan.jpg';
+import { NavLink } from 'react-router-dom';
 
 
 let Novels = (props) => {
-
+    debugger
     let pagesCount = Math.ceil(props.totalNovelsCount / props.pageSize)
     let pages = [];
     let stringPageLength = () => (pagesCount <= 10 ? pagesCount : 10)
@@ -21,8 +21,14 @@ let Novels = (props) => {
         {
             props.novels.map(n => <div key={n.id}>
                 <h2>{n.name}</h2>
-                <img src={img} alt={n.name} />
-                <p>Description </p>
+                <NavLink to={`/novel/${n.id}`}>
+                <img src={n.photos.large!=null
+                                        ?n.photos.small
+                                        :img} alt={n.name} />
+                                        </NavLink>
+                <p> {n.status!=null 
+                            ?n.status
+                            :'status'} </p>
                 {n.followed
                     ? <button onClick={() => props.addBookmark(n.id)}>В закладки</button>
                     : <button onClick={() => props.delBookmark(n.id)}>Из закладок</button>}
@@ -31,12 +37,4 @@ let Novels = (props) => {
         }
     </div>
 }
-
-
-
-
-
-
-
-
 export default Novels;
