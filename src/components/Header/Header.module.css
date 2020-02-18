@@ -1,7 +1,20 @@
 .header{
   grid-area: h;
   background-color:yellowgreen;
+  display: flex;  
 }
 .header img{
   width: 80px;
+  grid-area: l;
+}
+
+.userLogin{
+  background-color: beige;
+}
+
+.userLogin img{
+  display: block;
+  border-radius: 50%;
+  width: 50px;
+
 }
