@@ -4,7 +4,6 @@ import Preloader from '../../common/Preloader'
 import img from '../../../img/YinYan.jpg'
 
 let ProfileInfo = (props) => {
-    debugger
     if (!props.novelInfo) {
         return <Preloader/>
     }

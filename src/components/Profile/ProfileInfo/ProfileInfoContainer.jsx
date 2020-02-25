@@ -1,22 +1,21 @@
 import React from 'react';
-import * as axios from 'axios'
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo'
 import {setNovel} from '../../../redux/novels-reducer'
 import { withRouter } from 'react-router-dom';
+import NovelAPI  from '../../../api/api';
 
 
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount(){
-        let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = 2;
+        let novelId = this.props.match.params.userId;
+        if (!novelId) {
+            novelId = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                debugger
-                this.props.setNovel(response.data);
+        NovelAPI.getNovel(novelId)
+            .then(data => {
+                this.props.setNovel(data);
             });
     }
 

@@ -1,5 +1,4 @@
 
-import * as axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import {
@@ -8,8 +7,10 @@ import {
     setCurrentPage,
     setNovels,
     setTotalNovelsCount,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleBookmarking
 } from '../../redux/novels-reducer';
+import NovelAPI from '../../api/api'
 
 import Preloader from '../common/Preloader';
 import Novels from './Novels';
@@ -18,27 +19,27 @@ import Novels from './Novels';
 class NovelsContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(res => {
+       NovelAPI.getNovels()
+            .then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setNovels(res.data.items)
-                this.props.setTotalNovelsCount(res.data.totalCount);
+                this.props.setNovels(data.items)
+                this.props.setTotalNovelsCount(data.totalCount);
             })
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(res => {
+        NovelAPI.getPagesNovels(pageNumber,this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setNovels(res.data.items)
-            });
+                this.props.setNovels(data.items)
+            })
     }
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader style={ {position: 'absolute'}}/> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Novels onPageChanged={this.onPageChanged}
                 totalNovelsCount={this.props.totalNovelsCount}
                 pageSize={this.props.pageSize}
@@ -46,6 +47,8 @@ class NovelsContainer extends React.Component {
                 delBookmark={this.props.delBookmark}
                 novels={this.props.novels}
                 currentPage={this.props.currentPage}
+                toggleBookmarking={this.props.toggleBookmarking}
+                bookmarking={this.props.bookmarking}
             />
         </>
     }
@@ -58,6 +61,7 @@ let mapStateToProps = (state) => {
         totalNovelsCount: state.novelsPage.totalNovelsCount,
         currentPage: state.novelsPage.currentPage,
         isFetching: state.novelsPage.isFetching,
+        bookmarking: state.novelsPage.bookmarking
     
     }
 }
@@ -68,5 +72,6 @@ export default connect(mapStateToProps, {
     setNovels,
     setCurrentPage,
     setTotalNovelsCount,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleBookmarking
 })(NovelsContainer);

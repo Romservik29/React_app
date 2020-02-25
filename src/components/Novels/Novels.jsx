@@ -1,10 +1,10 @@
 import React from 'react';
 import img from '../../img/YinYan.jpg';
 import { NavLink } from 'react-router-dom';
+import NovelAPI from '../../api/api';
 
 
 let Novels = (props) => {
-    debugger
     let pagesCount = Math.ceil(props.totalNovelsCount / props.pageSize)
     let pages = [];
     let stringPageLength = () => (pagesCount <= 10 ? pagesCount : 10)
@@ -22,16 +22,32 @@ let Novels = (props) => {
             props.novels.map(n => <div key={n.id}>
                 <h2>{n.name}</h2>
                 <NavLink to={`/novel/${n.id}`}>
-                <img src={n.photos.large!=null
-                                        ?n.photos.small
-                                        :img} alt={n.name} />
-                                        </NavLink>
-                <p> {n.status!=null 
-                            ?n.status
-                            :'status'} </p>
+                    <img src={n.photos.large != null
+                        ? n.photos.small
+                        : img} alt={n.name} />
+                </NavLink>
+                <p> {n.status != null
+                    ? n.status
+                    : 'status'} </p>
                 {n.followed
-                    ? <button onClick={() => props.addBookmark(n.id)}>В закладки</button>
-                    : <button onClick={() => props.delBookmark(n.id)}>Из закладок</button>}
+                    ? <button disabled={props.bookmarking.some(id=>id===n.id)} onClick={() => {
+                        props.toggleBookmarking(true, n.id)
+                        NovelAPI.unSubptionNovel(n.id)
+                            .then(status => {
+                                if (status === 200) props.delBookmark(n.id);
+                                props.toggleBookmarking(false,n.id)
+                            })
+                    }}>
+                        Из закладок</button>
+                    : <button disabled={props.bookmarking.some(id=>id===n.id)} onClick={() => {
+                        props.toggleBookmarking(true, n.id)
+                        NovelAPI.subptionNovel(n.id)
+                            .then(status => {
+                                if (status === 200) props.addBookmark(n.id);
+                                props.toggleBookmarking(false, n.id)
+                            })
+                    }}>
+                        В закладки</button>}
             </div>
             )
         }
