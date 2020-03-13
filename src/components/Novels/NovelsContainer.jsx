@@ -8,47 +8,28 @@ import {
     setNovels,
     setTotalNovelsCount,
     toggleIsFetching,
-    toggleBookmarking
+    toggleBookmarking,
+    getNovels
 } from '../../redux/novels-reducer';
-import NovelAPI from '../../api/api'
-
 import Preloader from '../common/Preloader';
 import Novels from './Novels';
 
 
 class NovelsContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-       NovelAPI.getNovels()
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setNovels(data.items)
-                this.props.setTotalNovelsCount(data.totalCount);
-            })
+        this.props.getNovels();
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        NovelAPI.getPagesNovels(pageNumber,this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setNovels(data.items)
-            })
+        this.props.getNovels(pageNumber, this.props.pageSize);
     }
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {this.props.isFetching ? <Preloader /> : null}
             <Novels onPageChanged={this.onPageChanged}
-                totalNovelsCount={this.props.totalNovelsCount}
-                pageSize={this.props.pageSize}
-                addBookmark={this.props.addBookmark}
-                delBookmark={this.props.delBookmark}
-                novels={this.props.novels}
-                currentPage={this.props.currentPage}
-                toggleBookmarking={this.props.toggleBookmarking}
-                bookmarking={this.props.bookmarking}
+                {...this.props}
             />
         </>
     }
@@ -62,7 +43,7 @@ let mapStateToProps = (state) => {
         currentPage: state.novelsPage.currentPage,
         isFetching: state.novelsPage.isFetching,
         bookmarking: state.novelsPage.bookmarking
-    
+
     }
 }
 
@@ -73,5 +54,6 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalNovelsCount,
     toggleIsFetching,
-    toggleBookmarking
+    toggleBookmarking,
+    getNovels
 })(NovelsContainer);

@@ -8,38 +8,41 @@ const instance = axios.create({
     }
 })
 
-const  NovelAPI = {
+const NovelAPI = {
     getNovels() {
         return instance.get("users")
-        .then(res =>{
-            return res.data;
-        })
+            .then(res => {
+                return res.data;
+            })
     },
     getPagesNovels(pageNumber, pageSize) {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
-        .then(res =>{
-            return res.data;
-        })
+            .then(res => {
+                return res.data;
+            })
     },
-    getNovel(novelId){
+    getNovel(novelId) {
         return instance.get(`profile/${novelId}`)
-        .then(res=>{
-            return res.data;
-        })
+            .then(res => {
+                return res.data;
+            })
     },
-    subptionNovel(novelId){
+    subptionNovel(novelId) {
         return instance.post(`follow/${novelId}`)
-        .then(res=>{
-            return res.status
-        })
+            .then(res => {
+                return res.status
+            })
     },
-    unSubptionNovel(novelId){
+    unSubptionNovel(novelId) {
         return instance.delete(`follow/${novelId}`)
-        .then(res=>{
-            return res.status
-        })
-    },
-    authMe(){
+            .then(res => {
+                return res.status
+            })
+    }
+}
+
+export const authAPI = {
+    authMe() {
         return instance.get(`auth/me`)
     }
 }

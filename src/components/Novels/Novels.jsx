@@ -31,21 +31,11 @@ let Novels = (props) => {
                     : 'status'} </p>
                 {n.followed
                     ? <button disabled={props.bookmarking.some(id=>id===n.id)} onClick={() => {
-                        props.toggleBookmarking(true, n.id)
-                        NovelAPI.unSubptionNovel(n.id)
-                            .then(status => {
-                                if (status === 200) props.delBookmark(n.id);
-                                props.toggleBookmarking(false,n.id)
-                            })
+                        props.subNovel(n.id)
                     }}>
                         Из закладок</button>
                     : <button disabled={props.bookmarking.some(id=>id===n.id)} onClick={() => {
-                        props.toggleBookmarking(true, n.id)
-                        NovelAPI.subptionNovel(n.id)
-                            .then(status => {
-                                if (status === 200) props.addBookmark(n.id);
-                                props.toggleBookmarking(false, n.id)
-                            })
+                        props.unsubNovel(n.id)
                     }}>
                         В закладки</button>}
             </div>

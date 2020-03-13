@@ -1,3 +1,5 @@
+import NovelAPI from "../api/api"
+
 const ADD_BOOKMARK = 'ADD-BOOKMARK'
 const DEL_BOOKMARK = 'DEL-BOOKMARK'
 const SET_NOVELS = 'SET-NOVELS'
@@ -66,7 +68,7 @@ const novelsReducer = (state = initialState, action) => {
     }
 
 }
-
+//actionCreator
 export const addBookmark = (novelId) => ({ type: ADD_BOOKMARK, novelId });
 export const delBookmark = (novelId) => ({ type: DEL_BOOKMARK, novelId });
 export const setNovels = (novels) => ({ type: SET_NOVELS, novels });
@@ -75,4 +77,36 @@ export const setTotalNovelsCount = (totalNovelCount) => ({ type: SET_TOTAL_NOVEL
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const setNovel = (novel) => ({ type: SET_NOVEL, novel })
 export const toggleBookmarking = (isFetching,id)=>({type: BOOKMARKING, isFetching,id})
+
+
+//thunkCreators
+export const getNovels = (pageNumber =1 ,pageSize=10) => (dispatch)=>{
+    dispatch(toggleIsFetching(true));    
+    NovelAPI.getPagesNovels(pageNumber,pageSize)
+        .then(data => {debugger
+            dispatch(toggleIsFetching(false));
+            dispatch(setNovels(data.items));
+            dispatch(setTotalNovelsCount(data.totalCount))
+        })
+}
+
+export const subNovel = (novelId)=>(dispatch)=>{
+    dispatch(toggleBookmarking(true, novelId))
+    NovelAPI.subptionNovel(novelId)
+        .then(status => {
+            if (status === 200) dispatch(addBookmark(novelId));
+            dispatch(toggleBookmarking(false, novelId))
+        })
+}
+
+export const unsubNovel = (novelId)=>(dispatch)=>{
+    dispatch(toggleBookmarking(true, novelId))
+    NovelAPI.unsubptionNovel(novelId)
+        .then(status => {
+            if (status === 200) dispatch(delBookmark(novelId));
+            dispatch(toggleBookmarking(false, novelId))
+        })
+}
+
+
 export default novelsReducer;

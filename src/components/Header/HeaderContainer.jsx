@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
 import { setAuthUserData } from '../../redux/auth-reducer'
-import NovelAPI from '../../api/api';
+import { authAPI } from '../../api/api';
+
 
 
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        NovelAPI.authMe()
+        authAPI.authMe()
             .then(data => {
                 if (data.data.resultCode === 0) {
                     let { id, login, email } = data.data;
