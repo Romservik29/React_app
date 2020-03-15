@@ -1,7 +1,9 @@
 .header{
   grid-area: h;
   background-color:yellowgreen;
-  display: flex;  
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
 }
 .header img{
   width: 80px;
@@ -9,7 +11,7 @@
 }
 
 .userLogin{
-  background-color: beige;
+  padding:3px;
 }
 
 .userLogin img{

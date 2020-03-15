@@ -46,7 +46,7 @@ const novelsReducer = (state = initialState, action) => {
             return { ...state, novels: [...action.novels] }
         }
         case SET_CURRENT_PAGE: {
-            return { ...state, currentPage: action.count }
+            return { ...state, currentPage: action.PageNumber }
         }
         case SET_TOTAL_NOVELS_COUNT: {
             return { ...state, totalNovelsCount: action.count }
@@ -69,7 +69,7 @@ const novelsReducer = (state = initialState, action) => {
 
 }
 //actionCreator
-export const addBookmark = (novelId) => ({ type: ADD_BOOKMARK, novelId });
+export const addBookmark = (novelId)    => ({ type: ADD_BOOKMARK, novelId });
 export const delBookmark = (novelId) => ({ type: DEL_BOOKMARK, novelId });
 export const setNovels = (novels) => ({ type: SET_NOVELS, novels });
 export const setCurrentPage = (PageNumber) => ({ type: SET_CURRENT_PAGE, PageNumber });
@@ -83,7 +83,7 @@ export const toggleBookmarking = (isFetching,id)=>({type: BOOKMARKING, isFetchin
 export const getNovels = (pageNumber =1 ,pageSize=10) => (dispatch)=>{
     dispatch(toggleIsFetching(true));    
     NovelAPI.getPagesNovels(pageNumber,pageSize)
-        .then(data => {debugger
+        .then(data => {
             dispatch(toggleIsFetching(false));
             dispatch(setNovels(data.items));
             dispatch(setTotalNovelsCount(data.totalCount))

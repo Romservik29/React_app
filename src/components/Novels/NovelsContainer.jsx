@@ -2,17 +2,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    addBookmark,
-    delBookmark,
+    unsubNovel,
+    subNovel,
     setCurrentPage,
     setNovels,
     setTotalNovelsCount,
     toggleIsFetching,
-    toggleBookmarking,
     getNovels
 } from '../../redux/novels-reducer';
 import Preloader from '../common/Preloader';
 import Novels from './Novels';
+import Pagination from '../common/Pagination';
 
 
 class NovelsContainer extends React.Component {
@@ -27,7 +27,12 @@ class NovelsContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+        {this.props.isFetching ? <Preloader /> : <Pagination totalNovelsCount={this.props.totalNovelsCount}
+        pageSize={this.props.pageSize}
+        onPageChanged={this.onPageChanged}
+        currentPage={this.props.currentPage}
+    />}
+
             <Novels onPageChanged={this.onPageChanged}
                 {...this.props}
             />
@@ -48,12 +53,11 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    addBookmark,
-    delBookmark,
     setNovels,
     setCurrentPage,
     setTotalNovelsCount,
     toggleIsFetching,
-    toggleBookmarking,
-    getNovels
+    getNovels,
+    unsubNovel,
+    subNovel
 })(NovelsContainer);

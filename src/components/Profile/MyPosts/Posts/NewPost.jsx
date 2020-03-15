@@ -1,4 +1,5 @@
 import React from 'react';
+import css from './Post.module.css'
 
 
 
@@ -12,11 +13,12 @@ const NewPost = (props) => {
     }
     
     return (
-    <div className={'classes.post'}>
+    <div className={css.newPost}>
         <div>
             <textarea onChange={onPostChange} 
                       ref={newPostElement}
-                      value={props.newPostText} />
+                      value={props.newPostText}
+                    />
         </div>
         <div>
             <button onClick={ props.addPost }>Send</button>

@@ -2,11 +2,9 @@
     border-radius: 8px;
     background-color: rgb(194, 194, 240);    
     display: flex;  
-    margin:25px 25px 25px 25px;
 }
 
 .post img{
-    margin: 10px 10px 10px 10px;
     border-radius: 50%;
     width: 75px;
     height: 75px;
@@ -23,6 +21,15 @@
     margin: 10px 10px 10px 10px;
     font-size: medium;
     color: black;
+}
+
+.newPost{
+    margin: 10px
+}
+
+textarea{
+    width:300px;
+    height: 60px;
 }
 
 

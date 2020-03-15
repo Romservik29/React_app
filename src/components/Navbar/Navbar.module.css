@@ -1,20 +1,19 @@
 .nav{
-    background-color: aqua;
-    grid-area: n;
-  
-  }
+    text-decoration: none;
+    display: flex;
+}
 
 .item{
-  color:green;
   font-size: 26px;
-  text-decoration: none;
+  padding:10px;
 }
 
 .item a{
   text-decoration: none;
+  color: #202632;
 }
 
 .item a.active{
-  color: red;
+  color: gold;
 }
   

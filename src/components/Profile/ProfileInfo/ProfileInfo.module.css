@@ -1,7 +1,8 @@
 .content{
     display: flex;
     padding: 10px 10px 10px 10px;
-
+    background-color: rgb(194, 194, 240);
+    border-radius: 8px;
 }
 
 .user_image{
@@ -17,4 +18,7 @@
 .user_info_name{
     font-size: 30px;
     font-weight: 700;
+}
+.user_info_name p{
+    
 }

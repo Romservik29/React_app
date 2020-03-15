@@ -33,7 +33,7 @@ const NovelAPI = {
                 return res.status
             })
     },
-    unSubptionNovel(novelId) {
+    unsubptionNovel(novelId) {
         return instance.delete(`follow/${novelId}`)
             .then(res => {
                 return res.status
