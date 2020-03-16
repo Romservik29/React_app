@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './ProfileInfo.module.css'
 import Preloader from '../../common/Preloader'
 import img from '../../../img/YinYan.jpg'
+import ProfileStatus from './ProfileStatus';
 
 let ProfileInfo = (props) => {
     if (!props.novelInfo) {
@@ -16,19 +17,13 @@ let ProfileInfo = (props) => {
         <div className={classes.user_info}>
             <div className={classes.user_info_name}>{props.novelInfo.fullName}</div>
             <div>29.10.2012</div>
-            <div>{props.novelInfo.status != null
-                ? props.novelInfo.status
-                : 'status'}</div>
-            <div>
+            <ProfileStatus status="anything"/>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis expedita eligendi
                 libero deserunt ab aliquam optio labore, officia rerum reprehenderit
                 similique recusandae fuga, sunt, excepturi vel blanditiis officiis nihil harum.
              </p>
             </div>
         </div>
-
-
-    </div>
     )
 }
 export default ProfileInfo;

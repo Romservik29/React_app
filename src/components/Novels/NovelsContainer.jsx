@@ -19,9 +19,9 @@ import { withAuthRedirect } from '../HOC/withAuthRedirect';
 
 class NovelsContainer extends React.Component {
     componentDidMount() {
-        this.props.getNovels();
+        this.props.setCurrentPage(1);
+        this.props.getNovels();        
     }
-
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
         this.props.getNovels(pageNumber, this.props.pageSize);
