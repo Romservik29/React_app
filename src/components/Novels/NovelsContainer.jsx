@@ -13,6 +13,8 @@ import {
 import Preloader from '../common/Preloader';
 import Novels from './Novels';
 import Pagination from '../common/Pagination';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../HOC/withAuthRedirect';
 
 
 class NovelsContainer extends React.Component {
@@ -52,12 +54,16 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {
-    setNovels,
-    setCurrentPage,
-    setTotalNovelsCount,
-    toggleIsFetching,
-    getNovels,
-    unsubNovel,
-    subNovel
-})(NovelsContainer);
+export default compose(
+    connect(mapStateToProps, {
+        setNovels,
+        setCurrentPage,
+        setTotalNovelsCount,
+        toggleIsFetching,
+        getNovels,
+        unsubNovel,
+        subNovel}),
+    withAuthRedirect
+
+
+)(NovelsContainer);

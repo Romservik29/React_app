@@ -12,7 +12,7 @@ const BOOKMARKING = 'BOOKMARKING'
 let initialState = {
     novels: [],
     totalNovelsCount: 0,
-    pageSize: 5,
+    pageSize: 10,
     currentPage: 1,
     isFetching: true,
     novel: null,

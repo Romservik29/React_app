@@ -4,6 +4,8 @@ import ProfileInfo from './ProfileInfo'
 import {setNovel} from '../../../redux/novels-reducer'
 import { withRouter } from 'react-router-dom';
 import NovelAPI  from '../../../api/api';
+import {compose} from 'redux'
+import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 
 
 class ProfileInfoContainer extends React.Component {
@@ -28,8 +30,8 @@ class ProfileInfoContainer extends React.Component {
         novelInfo: state.novelsPage.novel
     })
 
-    let WithUrlNovelContainerComponent = withRouter(ProfileInfoContainer)
-
-export default connect(mapStateToProps,{
-    setNovel
-})(WithUrlNovelContainerComponent);
+export default compose(
+    connect(mapStateToProps,{setNovel}),
+    withRouter,
+    withAuthRedirect
+)(ProfileInfoContainer);
