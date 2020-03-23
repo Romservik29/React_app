@@ -21,12 +21,7 @@ const NovelAPI = {
                 return res.data;
             })
     },
-    getNovel(novelId) {
-        return instance.get(`profile/${novelId}`)
-            .then(res => {
-                return res.data;
-            })
-    },
+
     subptionNovel(novelId) {
         return instance.post(`follow/${novelId}`)
             .then(res => {
@@ -38,6 +33,21 @@ const NovelAPI = {
             .then(res => {
                 return res.status
             })
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/${userId}`)
+            .then(res => {
+                return res.data;
+            })
+    },
+    getStatus(userId){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status){
+        return instance.put("profile/status", {status: status})
     }
 }
 

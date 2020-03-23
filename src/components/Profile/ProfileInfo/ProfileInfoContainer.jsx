@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo'
-import {setNovel} from '../../../redux/novels-reducer'
+import {getUserProfile,getUserStatus,updateStatus} from '../../../redux/profile-reducer'
 import { withRouter } from 'react-router-dom';
-import NovelAPI  from '../../../api/api';
+import {profileAPI}  from '../../../api/api';
 import {compose} from 'redux'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 
@@ -11,14 +11,13 @@ import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount(){
-        let novelId = this.props.match.params.userId;
-        if (!novelId) {
-            novelId = 2;
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = 5744;
         }
-        NovelAPI.getNovel(novelId)
-            .then(data => {
-                this.props.setNovel(data);
-            });
+        this.props.getUserProfile(userId)
+        this.props.getUserStatus(userId);
+    
     }
 
     render() {
@@ -27,11 +26,12 @@ class ProfileInfoContainer extends React.Component {
 }
 
    let mapStateToProps =(state)=>({
-        novelInfo: state.novelsPage.novel
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     })
 
 export default compose(
-    connect(mapStateToProps,{setNovel}),
+    connect(mapStateToProps,{getUserProfile, getUserStatus,updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileInfoContainer);
