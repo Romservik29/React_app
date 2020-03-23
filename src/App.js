@@ -7,6 +7,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NovelsContainer from './components/Novels/NovelsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Footer from './components/Footer/Footer';
+import Login from './components/Login/Login';
 
 const App = (props) => {
   return (
@@ -17,13 +18,16 @@ const App = (props) => {
           <Route path="/novel/:userId?" render={()=><Profile   
               store={props.store}
               dispatch={props.dispatch}
-                                 /> }/>
+          />}/>
                                    
           <Route path="/dialogs" render={()=><DialogsContainer
               store={props.store} 
               dispatch={props.dispatch}
-              />} />      
-              <Route path="/novels" render={()=><NovelsContainer/>} />    
+          />}/>      
+          <Route path="/novels" render={()=><NovelsContainer/>} 
+          />
+          <Route path="/login" render={()=><Login />}
+          />
         </div>
         <Footer/>
       </div>

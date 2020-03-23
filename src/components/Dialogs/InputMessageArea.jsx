@@ -1,30 +1,32 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
+import { Field, reduxForm } from 'redux-form';
 
 const InputMessageArea = (props) => {
 
-    let onSendMessage = ()=>{
-        props.sendMessage();
+    const onSubmit = (formData) => {
+       props.sendMessage(formData.newMessageText) 
+       console.log(formData)
     }
 
-    let onInputTextChange = (e)=>{
-        let text = e.target.value;
-        props.updateNewMessageText(text);
-    }
 
     return (
-
-        <div className={classes.dialog_wrapper + ' ' + classes.active}>
-            <div><textarea
-                    placeholder="Entre your message"
-                    onChange={onInputTextChange}                      
-                    value={props.newMessageText}/>
-                    </div>
-                <div>
-            <button onClick={onSendMessage}>Send</button></div>
-        </div>
+        <form onSubmit={props.handleSubmit(onSubmit)} className={classes.dialog_wrapper + ' ' + classes.active}>
+            <div><Field
+                component="textarea"
+                name = "newMessageText"
+                placeholder="Entre your message"
+            />
+            </div>
+            <div>
+                <button>Send</button></div>
+        </form>
 
     )
 }
 
-export default InputMessageArea;
+const newMessageReduxForm = reduxForm({
+    form: 'newMessageInputForm'
+})(InputMessageArea)
+
+export default newMessageReduxForm;
