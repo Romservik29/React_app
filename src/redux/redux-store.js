@@ -6,13 +6,15 @@ import authReducer from "./auth-reducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import appReducer from "./app-reducer";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     novelsPage: novelsReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 });
 
 let store = createStore(reducers,composeWithDevTools(

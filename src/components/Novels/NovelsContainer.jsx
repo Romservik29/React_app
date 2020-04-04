@@ -29,15 +29,15 @@ class NovelsContainer extends React.Component {
 
     render() {
         return <>
-        {this.props.isFetching ? <Preloader /> : <Pagination totalNovelsCount={this.props.totalNovelsCount}
+         <Pagination totalNovelsCount={this.props.totalNovelsCount}
         pageSize={this.props.pageSize}
         onPageChanged={this.onPageChanged}
         currentPage={this.props.currentPage}
-    />}
+    />
 
-            <Novels onPageChanged={this.onPageChanged}
+          {this.props.isFetching ? <Preloader/> : <Novels onPageChanged={this.onPageChanged}
                 {...this.props}
-            />
+            />}
         </>
     }
 }
@@ -54,7 +54,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+export default compose(    
+    withAuthRedirect,
     connect(mapStateToProps, {
         setNovels,
         setCurrentPage,
@@ -63,7 +64,7 @@ export default compose(
         getNovels,
         unsubNovel,
         subNovel}),
-    withAuthRedirect
+
 
 
 )(NovelsContainer);

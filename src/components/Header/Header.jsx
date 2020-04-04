@@ -11,8 +11,8 @@ const Header = (props) => {
   return (
     <header className={classes.header}>
       <div>
-        <NavLink to="/novel"> <img src={logo} alt="Logo"/>
-
+        <NavLink to="/profile">
+           <img src={logo} alt="Logo"/>
         </NavLink>
       </div>
       <Navbar />
@@ -23,6 +23,7 @@ const Header = (props) => {
               ? img
               : svg}
             alt="" />
+            <button onClick={props.logout}>Logout</button>
         </NavLink>
       </div>
     </header>

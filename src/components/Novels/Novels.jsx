@@ -8,7 +8,7 @@ let Novels = (props) => {
     return <div className={css.wrapper}> 
         {props.novels.map(n => <div key={n.id}>
             <h2>{n.name}</h2>
-            <NavLink to={`/novel/${n.id}`}>
+            <NavLink to={`/profile/${n.id}`}>
                 <img className={css.novelImg} src={n.photos.large != null
                     ? n.photos.small
                     : img} alt={n.name} />

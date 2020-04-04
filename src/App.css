@@ -9,5 +9,6 @@
   "f";
   grid-template-columns: 1fr;
   margin: auto;
+  padding: auto;
   background-color: #202632;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './App.css';
 import Profile from './components/Profile/Profile';
 import BackgroundImg from './components/BackgroundImg';
@@ -8,21 +8,30 @@ import NovelsContainer from './components/Novels/NovelsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
+import { connect } from 'react-redux';
+import {initializingApp} from './redux/app-reducer'
+import { compose } from 'redux';
+import Preloader from './components/common/Preloader';
 
-const App = (props) => {
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initializingApp();
+}
+  render(){
+    if(!this.props.initialized) return <Preloader className='preloader'/>
   return (
       <div className='app-wrapper'>
         <HeaderContainer />
         <BackgroundImg />
         <div className='app-wrapper-content'>
-          <Route path="/novel/:userId?" render={()=><Profile   
-              store={props.store}
-              dispatch={props.dispatch}
+          <Route path="/profile/:userId?" render={()=><Profile   
+              store={this.props.store}
+              dispatch={this.props.dispatch}
           />}/>
                                    
           <Route path="/dialogs" render={()=><DialogsContainer
-              store={props.store} 
-              dispatch={props.dispatch}
+              store={this.props.store} 
+              dispatch={this.props.dispatch}
           />}/>      
           <Route path="/novels" render={()=><NovelsContainer/>} 
           />
@@ -33,6 +42,12 @@ const App = (props) => {
       </div>
   );
 }
+}
 
+const mapStateToProps= (state)=>({
+      initialized: state.app.initialized
+})
 
-export default App;
+export default compose( 
+  withRouter,
+  connect(mapStateToProps,{initializingApp}))(App);
