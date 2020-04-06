@@ -15,6 +15,7 @@ import Novels from './Novels';
 import Pagination from '../common/Pagination';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getBookmarking } from '../../redux/users-reselect';
 
 
 class NovelsContainer extends React.Component {
@@ -44,12 +45,12 @@ class NovelsContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        novels: state.novelsPage.novels,
-        pageSize: state.novelsPage.pageSize,
-        totalNovelsCount: state.novelsPage.totalNovelsCount,
-        currentPage: state.novelsPage.currentPage,
-        isFetching: state.novelsPage.isFetching,
-        bookmarking: state.novelsPage.bookmarking
+        novels: getUsers(state),
+        pageSize: getPageSize(state),
+        totalNovelsCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        bookmarking: getBookmarking(state)
 
     }
 }

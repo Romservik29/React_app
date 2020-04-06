@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
     return (<div className={classes.content}>
         <div className={classes.user_image}>
             <img src={props.profile.photos.large != null
-                ? props.profole.photos.large
+                ? props.profile.photos.large
                 : img} alt="" />
         </div>
         <div className={classes.user_info}>

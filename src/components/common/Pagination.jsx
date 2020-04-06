@@ -3,6 +3,7 @@ import css from "./Pagination.module.css"
 
 
 const Pagination = (props) => {
+    debugger
     let pagesCount = Math.ceil(props.totalNovelsCount / props.pageSize)
     let pages = [];
     for (let i = 1; i < 10; i++) pages = [...pages, i];
