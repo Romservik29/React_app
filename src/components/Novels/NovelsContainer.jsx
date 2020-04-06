@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
     unsubNovel,
@@ -18,29 +18,31 @@ import { withAuthRedirect } from '../HOC/withAuthRedirect';
 import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getBookmarking } from '../../redux/users-reselect';
 
 
-class NovelsContainer extends React.Component {
-    componentDidMount() {
-        this.props.setCurrentPage(1);
-        this.props.getNovels();        
-    }
-    onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.getNovels(pageNumber, this.props.pageSize);
+const NovelsContainer= (props)=> {
+    debugger
+    useEffect(()=>{
+        props.setCurrentPage(1);
+        props.getNovels();       
+    },[])
+
+
+    const onPageChanged = (pageNumber) => {
+        props.setCurrentPage(pageNumber);
+        props.getNovels(pageNumber, props.pageSize);
     }
 
-    render() {
+
         return <>
-         <Pagination totalNovelsCount={this.props.totalNovelsCount}
-        pageSize={this.props.pageSize}
-        onPageChanged={this.onPageChanged}
-        currentPage={this.props.currentPage}
+         <Pagination totalNovelsCount={props.totalNovelsCount}
+        pageSize={props.pageSize}
+        onPageChanged={onPageChanged}
+        currentPage={props.currentPage}
     />
 
-          {this.props.isFetching ? <Preloader/> : <Novels onPageChanged={this.onPageChanged}
-                {...this.props}
+          {props.isFetching ? <Preloader/> : <Novels onPageChanged={onPageChanged}
+                {...props}
             />}
-        </>
-    }
+        </>    
 }
 
 let mapStateToProps = (state) => {
